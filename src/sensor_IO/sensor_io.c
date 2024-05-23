@@ -3,55 +3,57 @@
 #define BlueLed 3
 #define SensorPIR 2
 
-const int LM35 = A0; // Pino que lera a saida do sensor de temperatura LM35
-int temperature; // var que armazena a temperatura media
+const int LM35 = A0; // Pin that will read the output of the LM35 temperature sensor
+int temperature; // var that stores the average temperature
 int trigger;
 
-// Variavel global para armazenar a intensidade
-int intensidade_red_light = 0;
-// Intensidade do ventilador
+// Global variable to store the intensity
+int intensity_red_light = 0;
+// Fan intensity
+int intensity_fan = 0;
 
 void setup()
 {
-  	// Sinal 9 configurado como Saida
-  	pinMode(RedLed, OUTPUT);
+  // Signal 9 configured as Output
+  pinMode(RedLed, OUTPUT);
 	pinMode(BlueLed, OUTPUT);
-    pinMode(SensorPIR, INPUT);
+  pinMode(SensorPIR, INPUT);
 
-    Serial.begin(9600); // Define a velocidade e inicia a comunicação
+  Serial.begin(9600); // Sets the speed and starts communication
 
 }
 void loop()
 {
-    temperature = int((double(analogRead(LM35))*5/(1023.0))/0.01);
-    trigger = digitalRead(SensorPIR);
+  temperature = int((double(analogRead(LM35))*5/(1023.0))/0.01);
+  trigger = digitalRead(SensorPIR);
     
-  	//Serial.print("Temperature: ");
-    //Serial.println(temperature);
-  	//Serial.println("---------------------");
-  	Serial.print("Trigger: ");
-    Serial.println(trigger);
-  	Serial.println("---------------------");
+  Serial.print("Temperature: ");
+  Serial.println(temperature);
+  Serial.println("---------------------");
+  Serial.print("Trigger: ");
+  Serial.println(trigger);
+  Serial.println("---------------------");
     
-  	if (temperature<=25)
-    {
-        intensidade_red_light = 85;
-    } else if (temperature<=33)
-    {
-        intensidade_red_light = 170;
-    } else {
-        intensidade_red_light = 255;
-    }
-    analogWrite(RedLed, intensidade_red_light);
+  if (temperature<=25)
+  {
+      intensity_red_light = 85;
+  } else if (temperature<=33)
+  {
+    intensity_red_light = 170;
+  } else 
+  {
+    intensity_red_light = 255;
+  }
+  analogWrite(RedLed, intensity_red_light);
 
-    if (trigger == LOW)
-    {
-        //
-    }else
-    {
-     //
-    }
+  if (trigger == LOW)
+  {
+    //
+  }else
+  {
+    //
+  }
 
-    // Aguarda meio segundo
-    delay(500);
+  // Wait half a second
+  delay(500);
 }
