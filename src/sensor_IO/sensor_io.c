@@ -45,15 +45,16 @@ void loop()
     intensity_red_light = 255;
   }
   analogWrite(RedLed, intensity_red_light);
+  
+if (trigger == HIGH) 
+    {
+      // Fan on
+      Serial.println("IS MOVING");
+    }else
+    {
+      // Fan off
+    }
 
-  if (trigger == LOW)
-  {
-    //
-  }else
-  {
-    //
-  }
-
-  // Wait half a second
-  delay(500);
+    // Wait half a second
+     delay(500);
 }
