@@ -1,4 +1,3 @@
-#define TMP 9
 #define RedLed 11
 #define BlueLed 5
 #define YellowLed 3
